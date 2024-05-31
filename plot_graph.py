@@ -12,3 +12,6 @@ plot_data = pd.DataFrame(
 # print(plot_data)
 st.bar_chart(plot_data)
 st.line_chart(plot_data)
+
+st.link_button('profile', url="/profile")
+st.link_button('Dashboard', url ='/dashboard')

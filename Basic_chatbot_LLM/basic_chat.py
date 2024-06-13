@@ -1,16 +1,16 @@
-import streamlit as st 
 
-# with st.chat_message('User'):
-#     st.write('Hello 🤚')
-
-chat_input= st.chat_input('Say something')
-st.write(f'User: ',chat_input)
+from transformers import pipeline
 
 
-upload_file = st.file_uploader('Choose a PDF file', type='pdf')
+# create question-answering pipeline
+# if we didn't provide model name then by defaul it will select distilbert-base-cased-distilled-squad
+qa = pipeline('question-answering') 
 
-if upload_file is not None:
-    pdf_path = upload_file.name
-    with open(pdf_path, 'wb') as f:
-        f.write(upload_file.getbuffer())
+context = 'Jeremy likes apple macbook pro laptop and he dont like to eat apple. '
+question= 'what Jeremy dont likes?'
+result= qa(context= context, question= question)
+
+print(result)
+print('Answer: ', result['answer'])
+
         

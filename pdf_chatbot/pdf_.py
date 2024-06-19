@@ -24,7 +24,7 @@ def get_text_pdf(pdf_files):
 
     return text
 
-model_name = 'distilbert-base-uncased-distilled-squad'
+model_name = 'distilbert-base-uncased-distilled-squad' # 
 model = TFDistilBertForQuestionAnswering.from_pretrained(model_name)
 tokenizer = DistilBertTokenizer.from_pretrained(model)
 

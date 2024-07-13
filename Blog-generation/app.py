@@ -6,20 +6,23 @@ from langchain.llms import CTransformers
 def getllamaresponse(input_text, no_words, blog_style):
 
     # load model using ctransfromers
+    # CTransfromers provide binding for ggml model 
+    # to get below model link:- https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main
     model = CTransformers(model='models/llama-2-7b-chat.ggmlv3.q8_0.bin',
                           model_type='llama',
                           config={'max_new_tokens':256,
                                   'temperature':0.01 })
     # create template 
-    template = """ write blog for {blog_style} job proflie for topic{input_text} withing {no_words} words"""
+    template = """ write blog for {blog_style} job proflie for topic{input_text} """ #withing {no_words} words
 
-    prompt = PromptTemplate(input_variables=['blog_style','input_text','no_words'],
+    prompt = PromptTemplate(input_variables=['blog_style','input_text'], # ,'no_words'
                             template=template)
     
     # get response
     response = model(prompt.format(blog_style = blog_style,
                                    input_text=input_text,
-                                   no_words= no_words))
+                                   #no_words= no_words
+                                   ))
     print(response)
     return response
     
@@ -47,6 +50,5 @@ if submit:
     # write model response
     st.write(getllamaresponse(input_text, no_words, blog_style))
     
-
 
 

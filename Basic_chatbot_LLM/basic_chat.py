@@ -13,4 +13,3 @@ result= qa(context= context, question= question)
 print(result)
 print('Answer: ', result['answer'])
 
-        
